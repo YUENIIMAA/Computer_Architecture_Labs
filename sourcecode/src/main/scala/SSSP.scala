@@ -11,17 +11,24 @@ object SSSP {
       .getOrCreate()
     val sc = spark.sparkContext
 
-    /* load graph from customized file */
+    /* load graph from customized file
+     *
+     * Lab1: use data/Graph.txt
+     * Lab2: use data/Wikipedia_vote_network.txt
+     * Lab3: use data/Google_web_graph.txt
+     */
     val iptGraph = GraphLoader.edgeListFile(sc, "data/Graph.txt")
 
-    /* confirm the correctness of imported graph */
-    println("[info]<--------Edge Information------>")
-    iptGraph.edges.collect.foreach(println(_))
-    println("[info]<-------Vertex Information----->")
-    iptGraph.vertices.collect.foreach(println(_))
+    /* confirm the correctness of imported graph
+     *
+     * println("[info]<--------Edge Information------>")
+     * iptGraph.edges.collect.foreach(println(_))
+     * println("[info]<-------Vertex Information----->")
+     * iptGraph.vertices.collect.foreach(println(_))
+     */
 
     /* specify the ultimate source */
-    val sourceId: VertexId = 0
+    val sourceId: VertexId = 4
 
     /* set distance to 0 if the vertex is the source and INF otherwise */
     val graph = iptGraph.mapVertices((id, _) => {
